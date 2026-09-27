@@ -1,0 +1,8 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^& 'C:\\\\Program Files\\\\Eclipse Adoptium\\\\jdk-20\\.0\\.2\\.9-hotspot\\\\bin\\\\javac\\.exe' -encoding UTF-8 -d build src\\\\mind8dispacher\\\\Main\\.java$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}
