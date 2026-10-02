@@ -10,12 +10,55 @@
 				"UTF-8",
 				"-d",
 				"build",
-				"src/mind8dispacher/Main.java"
+				"src/mind8dispacher/AccessPointer.java",
+				"src/mind8dispacher/CFunctionTable.java",
+				"src/mind8dispacher/Dispatcher.java",
+				"src/mind8dispacher/LocTablePointer.java",
+				"src/mind8dispacher/Main.java",
+				"src/mind8dispacher/MCodePointer.java",
+				"src/mind8dispacher/McoLoader.java",
+				"src/mind8dispacher/StackPointer.java"
 			],
 			"problemMatcher": [
 				"$javac"
 			],
 			"group": "build"
+		},
+		{
+			"label": "compile mind8dispacher tests",
+			"type": "shell",
+			"command": "javac",
+			"args": [
+				"-encoding",
+				"UTF-8",
+				"-d",
+				"build",
+				"src/mind8dispacher/AccessPointer.java",
+				"src/mind8dispacher/CFunctionTable.java",
+				"src/mind8dispacher/Dispatcher.java",
+				"src/mind8dispacher/LocTablePointer.java",
+				"src/mind8dispacher/Main.java",
+				"src/mind8dispacher/MCodePointer.java",
+				"src/mind8dispacher/McoLoader.java",
+				"src/mind8dispacher/StackPointer.java",
+				"tests/RegressionTests.java"
+			],
+			"problemMatcher": [
+				"$javac"
+			]
+		},
+		{
+			"label": "test mind8dispacher",
+			"type": "shell",
+			"command": "java",
+			"args": [
+				"-cp",
+				"build",
+				"mind8dispacher.RegressionTests"
+			],
+			"dependsOn": "compile mind8dispacher tests",
+			"dependsOrder": "sequence",
+			"group": "test"
 		}
 	]
 }
