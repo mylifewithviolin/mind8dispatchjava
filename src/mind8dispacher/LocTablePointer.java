@@ -32,6 +32,28 @@ public class LocTablePointer {
         return value;
     }
 
+    public int getWordOffset(int wordIndex, ByteOrder byteOrder) {
+        Objects.requireNonNull(byteOrder, "byteOrder");
+        if (wordIndex < 0 || (long) wordIndex * Integer.BYTES > data.length - Integer.BYTES) {
+            throw new IndexOutOfBoundsException("LOC word index is outside the table: " + wordIndex);
+        }
+        int offset = wordIndex * Integer.BYTES;
+        long value = 0;
+        if (byteOrder == ByteOrder.BIG_ENDIAN) {
+            for (int index = 0; index < Integer.BYTES; index++) {
+                value = (value << Byte.SIZE) | Byte.toUnsignedLong(data[offset + index]);
+            }
+        } else {
+            for (int index = Integer.BYTES - 1; index >= 0; index--) {
+                value = (value << Byte.SIZE) | Byte.toUnsignedLong(data[offset + index]);
+            }
+        }
+        if (value > Integer.MAX_VALUE) {
+            throw new IndexOutOfBoundsException("LOC M-code offset exceeds supported range: " + value);
+        }
+        return (int) value;
+    }
+
     public void seek(int byteOffset) {
         if (byteOffset < 0 || byteOffset > data.length
                 || (byteOffset & (Integer.BYTES - 1)) != 0) {
